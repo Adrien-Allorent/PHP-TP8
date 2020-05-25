@@ -1,28 +1,47 @@
+<h1>Auteurs de la BD</h1>
+
 <?php
+
 include 'connexpdo.php';
 
-$idcon = connexpdo( 'pgsql:host=localhost;port=5432;dbname=citations;', 'postgres', 'password');
+$dsn = 'pgsql:host=localhost;port=5432;dbname=citations;';
+$user = 'postgres';
+$password = 'new_password';
+$idcon = connexpdo($dsn, $user, $password);
 
-echo "<h1><strong>Auteurs de la BD</strong></h1>";
-$query1 = "SELECT * from auteur"; //Auteurs
+$query1 = "SELECT * FROM auteur";
 $result1 = $idcon->query($query1);
+echo "<table><tr><td>Prenom</td><td>Nom</td></tr>";
 foreach($result1 as $data)
 {
-    echo $data['prenom']." ".$data['nom']."<br>";
+    echo "<tr><td>".$data['prenom']."</td><td>".$data['nom']."</td></tr>";
 }
+echo "</table>";
 
-echo "<h1><strong>Citations de la BD</strong></h1>";
-$query2 = "SELECT * from citation"; //Citations
-$result2 = $idcon->query($query2);
-foreach($result2 as $data)
+?>
+
+<h1>Citations de la BD</h1>
+
+<?php
+
+$query1 = "SELECT * FROM citation";
+$result1 = $idcon->query($query1);
+foreach($result1 as $data)
 {
     echo $data['phrase']."<br>";
 }
 
-echo "<h1><strong>Siècles de la BD</strong></h1>";
-$query3 = "SELECT * from siecle"; //Siècles
-$result3 = $idcon->query($query3);
-foreach($result3 as $data)
+?>
+
+<h1>Siècles de la BD</h1>
+
+<?php
+
+$query1 = "SELECT * FROM siecle";
+$result1 = $idcon->query($query1);
+foreach($result1 as $data)
 {
     echo $data['numero']."<br>";
 }
+
+?>
